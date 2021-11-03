@@ -16,12 +16,13 @@ JournalModel to Animal
 */
 
 router.post("/create", async (req, res) => {
-    const { name, legNumber, predator } = req.body.animal;
-    // const { id } = req.user;
+    const { name, legNumber, predator, } = req.body.animal;
+    const { id } = req.user;
     const animalEntry = {
         name,
         legNumber,
-        predator
+        predator,
+        userId: id
     };
     try {
         const newAnimal = await Animal.create(animalEntry);
@@ -75,6 +76,8 @@ router.put("/update/:animalId", validateJWT, async (req, res) => {
         name: name,
         legNumber: legNumber,
         predator: predator,
+        userId: id
+        
     };
 
     try {
